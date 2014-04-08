@@ -74,6 +74,7 @@
     </Compile>
     <Compile Include="Background.cs" />
     <Compile Include="DirectionalController.cs" />
+    <Compile Include="Pi.cs" />
     <Compile Include="SnakeGame.cs" />
     <Compile Include="TouchInput.cs" />
     <Compile Include="LocalizedStrings.cs" />
@@ -105,17 +106,26 @@
     <Content Include="Content\Chrome\ControllerButton.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Players\SnakeBodyHex.xnb">
+    <Content Include="Content\Players\SnakeBodyHex30x30.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Audio\NelsonHaHa.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Players\SnakeBodyRounded50x50.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Fonts\RetroFont.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\HomerSoftDoh.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Content\Players\SnakeBodySquare.xnb">
+    <Content Include="Content\Players\SnakeBodySquare30x30.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

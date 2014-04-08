@@ -44,15 +44,15 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Players\SnakeBodySquare.png">
-      <Name>SnakeBodySquare</Name>
+    <Compile Include="Players\SnakeBodySquare30x30.png">
+      <Name>SnakeBodySquare30x30</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Players\SnakeBodyHex.png">
-      <Name>SnakeBodyHex</Name>
+    <Compile Include="Players\SnakeBodyHex30x30.png">
+      <Name>SnakeBodyHex30x30</Name>
       <Importer>TextureImporter</Importer>
       <Processor>TextureProcessor</Processor>
     </Compile>
@@ -60,6 +60,29 @@
   <ItemGroup>
     <Compile Include="Audio\NelsonHaHa.wav">
       <Name>NelsonHaHa</Name>
+      <Importer>WavImporter</Importer>
+      <Processor>SoundEffectProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Players\SnakeBodyRounded50x50.png">
+      <Name>SnakeBodyRounded50x50</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Fonts\RetroFont.spritefont">
+      <Name>RetroFont</Name>
+      <Importer>FontDescriptionImporter</Importer>
+      <Processor>FontDescriptionProcessor</Processor>
+      <SubType>Designer</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Compile Include="Audio\HomerSoftDoh.wav">
+      <Name>HomerSoftDoh</Name>
       <Importer>WavImporter</Importer>
       <Processor>SoundEffectProcessor</Processor>
     </Compile>

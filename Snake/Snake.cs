@@ -30,10 +30,15 @@ namespace Snake
         private List<Vector2> _nodes;
         private int _lengthInSegments;
 
-        private double _lastGrowTotalMilliseconds;
         private double _lastMoveTotalMilliseconds;
 
         private bool _collidedWithSelf;
+
+        public SpriteFont Font
+        {
+            get;
+            set;
+        }
 
         public Snake(Rectangle bounds)
         {
@@ -49,8 +54,13 @@ namespace Snake
 
         public void LoadContent(ContentManager contentManager)
         {
-            _texture = contentManager.Load<Texture2D>(@"Players\SnakeBodyHex");
+            _texture = contentManager.Load<Texture2D>(@"Players\SnakeBodyRounded50x50");
 
+            UpdateMetrics();
+        }
+
+        private void UpdateMetrics()
+        {
             // Assumes the texture is a square sprite
             _textureSize = _texture.Width;
 
@@ -60,15 +70,9 @@ namespace Snake
 
         public void Update(GameTime time, Vector2 inputDelta)
         {
-            double totalMilliseconds = time.TotalGameTime.TotalMilliseconds;
-            if (totalMilliseconds - _lastGrowTotalMilliseconds > StartingGrowthInMsPerSegment)
+            if (_nodes == null)
             {
-                _lengthInSegments += GrowthLengthInSegments;
-                _lastGrowTotalMilliseconds = totalMilliseconds;
-
-                // TODO: Move this to its own block
-                // Accelerate slightly
-                _speedInMsPerSegment -= 10;
+                Spawn();
             }
 
             ApplyTouchDelta(inputDelta);
@@ -77,6 +81,7 @@ namespace Snake
             Debug.Assert(_nodes.Count > 0);
 
             // Adjust the position of the head of the snake
+            double totalMilliseconds = time.TotalGameTime.TotalMilliseconds;
             int numSegmentsToMove = (int)Math.Floor((totalMilliseconds - _lastMoveTotalMilliseconds) / _speedInMsPerSegment);
             if (numSegmentsToMove > 0)
             {
@@ -98,9 +103,17 @@ namespace Snake
 
         public void Draw(GameTime gameTime, SpriteBatch batch)
         {
+            int digitIndex = 0;
+
             // TODO: ToList() may be too expensive
             GetSnakeSegementEnumerator().ToList().ForEach(position => 
-                    batch.Draw(_texture, new Rectangle((int)position.X * _textureSize, (int)position.Y * _textureSize, _textureSize, _textureSize), Color.White));
+                {
+                    int x = (int)position.X * _textureSize;
+                    int y = (int)position.Y * _textureSize;
+
+                    batch.Draw(_texture, new Rectangle(x, y, _textureSize, _textureSize), Color.White);
+                    batch.DrawString(Font, Pi.Instance[digitIndex++].ToString(), new Vector2(x, y), Color.Blue);
+                });
         }
 
         public void Spawn()
@@ -121,6 +134,16 @@ namespace Snake
 
             // Set the starting speed
             _speedInMsPerSegment = StartingSpeedInMsPerSegment;
+        }
+
+        public void Grow()
+        {
+            _lengthInSegments += GrowthLengthInSegments;
+        }
+
+        public void Accelerate()
+        {
+            _speedInMsPerSegment -= 10;
         }
 
         private void ApplyTouchDelta(Vector2 delta)
@@ -198,7 +221,6 @@ namespace Snake
                 Vector2 currentNode = _nodes[i];
                 Vector2 delta = currentNode - previousNode;
 
-
                 remainingLengthInSegments -= delta.Length();
                 if (remainingLengthInSegments < 0)
                 {
@@ -219,20 +241,38 @@ namespace Snake
                     _nodes[i] = currentNode;
                 }
 
-                Vector2 start = previousNode;
-                Vector2 end = currentNode;
-
-                if (delta.X < 0 || delta.Y < 0)
+                if (delta.X != 0)
                 {
-                    start = currentNode;
-                    end = previousNode;
-                }
-
-                for (float y = start.Y; y <= end.Y; y++)
-                {
-                    for (float x = start.X; x <= end.X; x++)
+                    if (delta.X < 0)
                     {
-                        yield return new Vector2(x, y);
+                        for (float x = previousNode.X; x > currentNode.X; x--)
+                        {
+                            yield return new Vector2(x, currentNode.Y);
+                        }
+                    }
+                    else
+                    {
+                        for (float x = previousNode.X; x < currentNode.X; x++)
+                        {
+                            yield return new Vector2(x, currentNode.Y);
+                        }
+                    }
+                }
+                else if (delta.Y != 0)
+                {
+                    if (delta.Y < 0)
+                    {
+                        for (float y = previousNode.Y; y > currentNode.Y; y--)
+                        {
+                            yield return new Vector2(currentNode.X, y);
+                        }
+                    }
+                    else
+                    {
+                        for (float y = previousNode.Y; y < currentNode.Y; y++)
+                        {
+                            yield return new Vector2(currentNode.X, y);
+                        }
                     }
                 }
 

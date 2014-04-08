@@ -22,6 +22,7 @@ namespace Snake
         private Background _background;
         private Snake _snake;
 
+        private SpriteFont _font;
         private SoundEffect _gameOverSound;
 
         private bool _soundEnabled;
@@ -78,9 +79,14 @@ namespace Snake
 
             // Game sprites
             _snake.LoadContent(Content);
-            _snake.Spawn();
 
-            _gameOverSound = Content.Load<SoundEffect>(@"Audio\NelsonHaHa");
+            // Sounds
+            _gameOverSound = Content.Load<SoundEffect>(@"Audio\HomerSoftDoh");
+
+            // Fonts
+            // http://www.dafont.com/8bit-wonder.font
+            _font = Content.Load<SpriteFont>(@"Fonts\RetroFont");
+            _snake.Font = _font;
         }
 
         /// <summary>
