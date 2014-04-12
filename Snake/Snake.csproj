@@ -72,7 +72,6 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Background.cs" />
     <Compile Include="DirectionalController.cs" />
     <Compile Include="Pi.cs" />
     <Compile Include="SnakeGame.cs" />
@@ -109,16 +108,19 @@
     <Content Include="Content\Players\SnakeBodyHex30x30.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Audio\NelsonHaHa.xnb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Players\SnakeBodyRounded50x50.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Fonts\RetroFont.xnb">
+    <Content Include="Content\Audio\HomerSoftDoh.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Audio\HomerSoftDoh.xnb">
+    <Content Include="Content\Fonts\SegoeFont.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\Fail.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Audio\Success.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="Properties\AppManifest.xml" />

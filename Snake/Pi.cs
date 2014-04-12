@@ -11,7 +11,7 @@ namespace Snake
         private static Pi _Instance;
 
         // First thousand digits of Pi
-        private string digits = 
+        private string _digits =
           "3.14159265358979323846264338327950288419716939937510" +
             "58209749445923078164062862089986280348253421170679" +
             "82148086513282306647093844609550582231725359408128" +
@@ -33,6 +33,14 @@ namespace Snake
             "59825349042875546873115956286388235378759375195778" +
             "18577805321712268066130019278766111959092164201989";
 
+        public string Digits
+        {
+            get
+            {
+                return _digits;
+            }
+        }
+
         public static Pi Instance
         {
             get
@@ -50,7 +58,7 @@ namespace Snake
         {
             get
             {
-                return digits[i];
+                return _digits[i];
             }
         }
     }
