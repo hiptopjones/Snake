@@ -195,10 +195,9 @@ namespace Snake
                         position = new Vector2(x, y);
 
                         // Check against snake segments
-                        if (!_snake.IsPartOfSnake(position))
+                        if (_snake.IsPartOfSnake(position))
                         {
-                            _items[i] = position;
-                            break;
+                            continue;
                         }
 
                         // Check against existing items
@@ -206,9 +205,12 @@ namespace Snake
                         {
                             if (test.X == position.X && test.Y == position.Y)
                             {
-                                break;
+                                continue;
                             }
                         }
+
+                        _items[i] = position;
+                        break;
                     }
                 }
             }
@@ -254,7 +256,12 @@ namespace Snake
                 _spriteBatch.DrawString(_font, digit, digitPosition, Color.Blue, 0, _font.MeasureString(digit) / 2, 1, SpriteEffects.None, 0);
             }
 
-            // Draw the collected PI string
+            // Draw the next digit as a hint
+            string hintDigits = Pi.Instance.Digits.Substring(0, _collectedDigits.Length + 1);
+            Vector2 hintDigitsPosition = new Vector2(10, _viewBounds.Height - _font.MeasureString(hintDigits).Y - 10);
+            _spriteBatch.DrawString(_font, hintDigits, hintDigitsPosition, Color.Black, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
+
+            // Draw the collected PI string (draws over the hint digits, except the last one)
             string collectedDigits = _collectedDigits;
             if (collectedDigits.Length > MaxCollectedDigitsToShow)
             {
@@ -263,8 +270,6 @@ namespace Snake
 
             Vector2 collectedDigitsPosition = new Vector2(10, _viewBounds.Height - _font.MeasureString(collectedDigits).Y - 10);
             _spriteBatch.DrawString(_font, collectedDigits, collectedDigitsPosition, Color.Yellow, 0, new Vector2(0, 0), 1, SpriteEffects.None, 0);
-
-            // TODO: Draw the next digit as a hint (in grey?) after some time
 
             // Draw the collected score string
             string score = "Score: " + _score;
